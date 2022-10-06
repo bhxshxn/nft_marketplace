@@ -9,7 +9,7 @@ import axios from "axios";
 import { useRef, useState } from "react";
 import toast, { Toaster } from "react-hot-toast";
 import Header from "../components/Header";
-import Loading from "../components/Loading";
+import LoadingFullScreen from "../components/LoadingFullScreen";
 
 const style = {
   Wrapper: `flex flex-col justify-top items-center h-screen w-screen bg-[#3b3d42] `,
@@ -51,7 +51,7 @@ const Create = () => {
 
     confirmMint();
     setDescription("");
-    setImage("");
+    setImage(null);
     setName("");
     setLoading(false);
   };
@@ -70,7 +70,7 @@ const Create = () => {
         {address ? (
           <>
             {loading ? (
-              <Loading />
+              <LoadingFullScreen />
             ) : (
               <div>
                 <form className={style.form} onSubmit={onSubmit}>
@@ -84,14 +84,14 @@ const Create = () => {
                         setImage(event.target.files[0]);
                       }}
                       ref={inputFileRef}
-                      accept='image/*,video/mp4,video/x-m4v,video/*'
+                      accept='image/*'
                     />
                     {image == null ? (
                       <div
                         onClick={() => inputFileRef.current.click()}
                         className='cursor-pointer	 text-center rounded-[5px] bg-white w-[248px] h-[24px]'
                       >
-                        Click to upload Image or Video
+                        Click to upload your Image
                       </div>
                     ) : (
                       <>
